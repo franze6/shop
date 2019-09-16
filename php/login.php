@@ -1,5 +1,4 @@
 <?php
-include_once "core.php";
 if($_REQUEST['do']=="login" && isset($_REQUEST['login']) && isset($_REQUEST['pass'])) {
 
     $db = db_connect();
@@ -59,5 +58,18 @@ if($_REQUEST['do']=="login" && isset($_REQUEST['login']) && isset($_REQUEST['pas
 
     echo json_encode($user_data);
 
+}
+
+function db_connect()
+{
+    include "../cfg/cfg.inc.php";
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $opt = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+    $db = new PDO($dsn, $user, $pass);
+    return $db;
 }
 
