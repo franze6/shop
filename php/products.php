@@ -38,6 +38,15 @@ function categories_list() {
     return $products_data;
 }
 
+function cart_list($id) {
+    $db = db_connect();
+
+    $query = $db->prepare("SELECT count_items, products.name, products.price, products.img FROM cart_int INNER JOIN products WHERE products.id = product_id AND user_id = $id");
+    $query->execute();
+
+    return $query->fetchAll();
+}
+
 function add_product() {
 
 }

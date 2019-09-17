@@ -16,7 +16,7 @@ $data = $query->fetchAll();
                 <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <?php
-                            for($i=0;$i<3;$i++)
+                            for($i=0;$i<count($data);$i++)
                                 if ($i == 0)
                                     echo "<li data-target=\"#slider-carousel\" data-slide-to=\"$i\" class='active'></li>";
                                 else

@@ -1,5 +1,7 @@
 <?php
 require_once 'php/core.php';
+require_once 'php/login.php';
+require_once 'php/products.php';
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +33,18 @@ require_once 'php/core.php';
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="/?page=cart"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+                                <?php
+                                $user_data = is_login();
+                                if($user_data != 0) {
+                                    $fname = $user_data['first_name'];
+                                    echo "<li><a href=\"#\"> <i class=\"fa fa-user\"></i>Добро пожаловать, $fname!</a> </li>";
+                                }
+                                else
+                                    echo "<li><a href=\"/?page=login\"><i class=\"fa fa-lock\"></i> Войти</a></li>";
+                                ?>
+
+
 							</ul>
 						</div>
 					</div>
@@ -55,14 +67,14 @@ require_once 'php/core.php';
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="/" class="active">Главная</a></li>
-								<li><a href="#">Каталог</a></li>
+								<li><a href="/?page=shop">Каталог</a></li>
 								<li><a href="contact-us.html">Контакты</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<input type="text" placeholder="Поиск"/>
 						</div>
 					</div>
 				</div>
@@ -74,6 +86,10 @@ require_once 'php/core.php';
     if(isset($_GET['page'])) {
         if ($_GET['page'] == "shop")
             require_once 'pages/shop.php';
+        elseif ($_GET['page'] == "login")
+            require_once 'pages/login.php';
+        elseif ($_GET['page'] == "cart")
+            require_once  'pages/cart.php';
     }
     else {
         require_once 'pages/home.php';
@@ -131,16 +147,6 @@ require_once 'php/core.php';
 								<li><a href="#">Affillate Program</a></li>
 								<li><a href="#">Copyright</a></li>
 							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<form action="#" class="searchform">
-								<input type="text" placeholder="Your email address" />
-								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-								<p>Get the most recent updates from <br />our site and be updated your self...</p>
-							</form>
 						</div>
 					</div>
 					
