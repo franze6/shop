@@ -7,8 +7,10 @@ require_once 'php/products.php';
     $list = products_list(12*$count, 12);
 }*/
 
-$list = products_list(0, 12);
+$list = products_list();
 $cat_list = categories_list();
+$min_price = get_min_price();
+$max_price = get_max_price();
 
 
 ?>
@@ -24,10 +26,11 @@ $cat_list = categories_list();
                         <?php
                         foreach ($cat_list as $val) {
                             $name = $val['name'];
+                            $id = $val['id'];
                             echo "
                         <div class=\"panel panel-default\">
                             <div class=\"panel-heading\">
-                                <h4 class=\"panel-title\"><a href=\"#\">$name</a></h4>
+                                <h4 class=\"panel-title\"><a id=\"$id\" href=\"#\">$name</a></h4>
                             </div>
                         </div>";
 
@@ -53,8 +56,8 @@ $cat_list = categories_list();
                     <div class="price-range"><!--price-range-->
                         <h2>Цена</h2>
                         <div class="well">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                            <b>$ 0</b> <b class="pull-right">$ 600</b>
+                            <input type="text" class="span2" value="" data-slider-min="<?=$min_price?>" data-slider-max="<?=$max_price?>" data-slider-step="5" data-slider-value="[<?=$min_price?>,<?=$max_price?>]" id="sl2" ><br />
+                            <b><?=$min_price?></b> <b class="pull-right"><?=$max_price?></b>
                         </div>
                     </div><!--/price-range-->
 
@@ -64,42 +67,13 @@ $cat_list = categories_list();
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Товары</h2>
-
-                    <?php
-                    foreach ($list as $val)
-                    {
-                        $id = $val['id'];
-                        $img = $val['img'];
-                        $price = $val['price'];
-                        $name = $val['name'];
-                        echo "<div class=\"col-sm-4\">
-                        <div class=\"product-image-wrapper\">
-                            <div class=\"single-products\">
-                                <div class=\"productinfo text-center\">
-                                    <img src=\"$img\" alt=\"\" />
-                                    <h2>$price</h2>
-                                    <p>$name</p>
-                                    <a id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
-                                </div>
-                                <div class=\"product-overlay\">
-                                    <div class=\"overlay-content\">
-                                        <h2>$price</h2>
-                                        <p>$name</p>
-                                        <a id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>";
-                    }
-                    ?>
-                    <ul class="pagination">
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">&raquo;</a></li>
-                    </ul>
+                    <div id="product_items">
+                        <?php
+                        require_once 'parts/product.php';
+                        ?>
+                    </div>
                 </div><!--features_items-->
+                <div id="more-items"><i class="fa fa-angle-down"></i></div>
             </div>
         </div>
     </div>

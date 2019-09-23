@@ -21,7 +21,7 @@ else
                     <td></td>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="cart_products">
 
                 <?php
                 foreach ($cart_list as $val) {
@@ -29,7 +29,8 @@ else
                     $price = $val['price'];
                     $name = $val['name'];
                     $count = $val['count_items'];
-                    echo "<tr>
+                    $id =$val['product_id'];
+                    echo "<tr id=\"$id\">
                     <td class=\"cart_product\">
                         <a href=\"\"><img src=\"$img\" alt=\"\"></a>
                     </td>
@@ -48,7 +49,7 @@ else
                         </div>
                     </td>
                     <td class=\"cart_total\">
-                        <p class=\"cart_total_price\">$59</p>
+                        <p class=\"cart_total_price\">".$price*$count."</p>
                     </td>
                     <td class=\"cart_delete\">
                         <a class=\"cart_quantity_delete\" href=\"\"><i class=\"fa fa-times\"></i></a>
