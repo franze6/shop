@@ -44,7 +44,7 @@ $data = $query->fetchAll();
                                 <button type=\"button\" class=\"btn btn-default get\">$button_text</button>
                                 </div>
                                 <div class=\"col-sm-6\">
-                                    <img src=\"$img\" class=\"girl img-responsive\" alt=\"\" />
+                                    <img src=\"/$img\" class=\"girl img-responsive\" alt=\"\" />
                                 </div>
                                 </div>";
 

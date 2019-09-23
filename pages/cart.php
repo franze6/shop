@@ -1,6 +1,6 @@
 <?php
 if($user_data == 0) {
-    header("Location: /?page=login");
+    header("Location: /pages/login.html");
     return;
 }
 else
@@ -32,7 +32,7 @@ else
                     $id =$val['product_id'];
                     echo "<tr id=\"$id\">
                     <td class=\"cart_product\">
-                        <a href=\"\"><img src=\"$img\" alt=\"\"></a>
+                        <a href=\"\"><img src=\"/$img\" alt=\"\"></a>
                     </td>
                     <td class=\"cart_description\">
                         <h4><a href=\"\">$name</a></h4>

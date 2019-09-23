@@ -10,13 +10,13 @@ require_once 'php/products.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | E-Shopper</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/price-range.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/price-range.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+	<link href="/css/responsive.css" rel="stylesheet">
 </head><!--/head-->
 
 <body>
@@ -27,13 +27,13 @@ require_once 'php/products.php';
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="/"><img src="<?=get_logo()?>" alt="" /></a>
+							<a href="/"><img src="/<?=get_logo()?>" alt="" /></a>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="/?page=cart"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+								<li><a href="/pages/cart.html"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                                 <?php
                                 $user_data = is_login();
                                 if($user_data != 0) {
@@ -41,7 +41,7 @@ require_once 'php/products.php';
                                     echo "<li><a href=\"#\"> <i class=\"fa fa-user\"></i>Добро пожаловать, $fname!</a> </li>";
                                 }
                                 else
-                                    echo "<li><a href=\"/?page=login\"><i class=\"fa fa-lock\"></i> Войти</a></li>";
+                                    echo "<li><a href=\"/pages/login.html\"><i class=\"fa fa-lock\"></i> Войти</a></li>";
                                 ?>
 
 
@@ -67,7 +67,7 @@ require_once 'php/products.php';
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="/" class="active">Главная</a></li>
-								<li><a href="/?page=shop">Каталог</a></li>
+								<li><a href="/pages/shop.html">Каталог</a></li>
 								<li><a href="contact-us.html">Контакты</a></li>
 							</ul>
 						</div>
@@ -157,11 +157,11 @@ require_once 'php/products.php';
 	
 
   
-    <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.scrollUp.min.js"></script>
+	<script src="/js/price-range.js"></script>
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

@@ -1,1 +1,3 @@
 ErrorDocument 404 /404.html
+RewriteEngine On
+RewriteRule ^pages/(.*).html$ index.php?page=$1

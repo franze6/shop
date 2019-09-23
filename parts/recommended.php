@@ -26,7 +26,7 @@ $rec = products_rec_list();
 										<div class=\"product-image-wrapper\">
 											<div class=\"single-products\">
 												<div class=\"productinfo text-center\">
-													<img src=\"$img\" alt=\"\" />
+													<img src=\"/$img\" alt=\"\" />
 													<h2>$price</h2>
 													<p>$name</p>
 													<a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в корзину</a>
