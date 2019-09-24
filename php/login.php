@@ -27,8 +27,7 @@ if (isset($_REQUEST['do'])) {
         setcookie("token", $token, time() + 60 * 60);
 
         if ($db->exec("UPDATE `sessions` SET `token`='$token' WHERE `user_id`=$id") == 0) {
-            echo "3";
-            $db->exec("INSERT INTO `sessions` (`id`, `token`, `user_id`) VALUES (NULL, $token, $id)");
+            $db->exec("INSERT INTO `sessions` (`id`, `token`, `user_id`) VALUES (NULL, '$token', '$id')");
         }
 
         echo 1;
@@ -36,7 +35,11 @@ if (isset($_REQUEST['do'])) {
     } elseif ($_REQUEST['do'] == "login") {
         echo json_encode(is_login());
 
+    } elseif ($_REQUEST['do'] == "reg" && isset($_REQUEST['login']) && isset($_REQUEST['pass']) &&
+        isset($_REQUEST['fst_name']) && isset($_REQUEST['lst_name'])) {
+        add_user();
     }
+
 }
 
 function is_login() {
@@ -63,6 +66,42 @@ function is_login() {
     $user_data['id'] = $id;
 
     return $user_data;
+}
+
+function add_user() {
+    $res = validate_reg_data();
+    if($res != "") {
+        echo $res;
+        return;
+    }
+
+    $hlogin = md5($_REQUEST['login']);
+    $hpass= md5($_REQUEST['pass']);
+
+    $db = db_connect();
+
+    $query = $db->prepare("SELECT `id` FROM `users` WHERE `login` = '$hlogin'");
+    $query->execute();
+    if (isset($query->fetch()['id'])) {
+        echo "Пользователь с таким логином уже есть в базе";
+        return;
+    }
+
+    $query = $db->prepare("INSERT INTO `users`(`id`, `login`, `password`, `first_name`, `last_name`) VALUES (NULL, '$hlogin', '$hpass', :fst_n, :lst_n)");
+    $query->execute(array('fst_n'=>$_REQUEST['fst_name'], 'lst_n'=>$_REQUEST['lst_name']));
+    echo "1";
+
+}
+
+function validate_reg_data() {
+    $login_p = "/^[a-zA-Z][a-zA-Z0-9-_\.]{3,30}$/";
+    $pass_p = "/(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/";
+    $name_p = "/^[а-яА-ЯёЁa-zA-Z0-9]+$/";
+
+    if(!preg_match($login_p, $_REQUEST['login'])) return "Логин может содержать латинский алфавит, цифры, символы - и _, а так же точку. Длина от 3 до 30 символов.";
+    if(!preg_match($pass_p, $_REQUEST['pass'])) return "Пароль может содержать латинский алфавит и спец. символы. Длина от 6 символов.";
+    //if(!preg_match($name_p, $_REQUEST['fst_name'])) return "Имя может содержать кириллицу и латинские символы.";
+    //if(!preg_match($name_p, $_REQUEST['lst_name'])) return "Фамилия может содержать кириллицу и латинские символы.";
 }
 
 

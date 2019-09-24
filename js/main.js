@@ -115,7 +115,28 @@ $(document).ready(function(){
 					window.location = "/";
 				}
 				else {
-					alert("Ошибка авторизации")
+					alert("Ошибка авторизации");
+					console.log(data);
+				}
+			}).fail(function() {
+				console.log('fail');
+			});
+		});
+
+		$('#signup-send').submit(function(e) {
+			e.preventDefault();
+			var $form = $(this);
+			$.ajax({
+				type: 'post',
+				url: '/ajax.php',
+				data: $form.serialize()
+			}).done(function(data) {
+				if(data=="1") {
+					alert("Вы успешно зарегестрировались!");
+					window.location = "/pages/login.html";
+				}
+				else {
+					alert(data);
 				}
 			}).fail(function() {
 				console.log('fail');

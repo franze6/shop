@@ -8,12 +8,9 @@
 						<h2>Авторизация</h2>
 						<form id="login-send" action="#">
                             <input type="hidden" name="do" value="login"/>
-							<input name="login" type="text" placeholder="E-mail" />
+							<input name="login" type="text" placeholder="Логин" />
 							<input name="pass" type="password" placeholder="Пароль" />
-							<span>
-								<input name="remember" type="checkbox" class="checkbox">
-Запомнить меня
-</span>
+							<span><input name="remember" type="checkbox" class="checkbox" />Запомнить меня</span>
 							<button type="submit" class="btn btn-default">Войти</button>
 						</form>
 					</div><!--/login form-->
@@ -25,9 +22,11 @@
 					<div class="signup-form"><!--sign up form-->
 						<h2>Регистрация</h2>
 						<form id="signup-send" action="#">
-							<input type="text" placeholder="Имя"/>
-							<input type="email" placeholder="E-mail"/>
-							<input type="password" placeholder="Пароль"/>
+                            <input type="hidden" name="do" value="reg"/>
+							<input name="fst_name" type="text" placeholder="Имя"/>
+                            <input name="lst_name" type="text" placeholder="Фамилия"/>
+							<input name="login" type="text" placeholder="Логин"/>
+							<input name="pass" type="password" placeholder="Пароль"/>
 							<button type="submit" class="btn btn-default">Зарегестрироваться</button>
 						</form>
 					</div><!--/sign up form-->
