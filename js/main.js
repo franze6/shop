@@ -21,7 +21,30 @@ function send_sort() {
 }
 
 function update_cart_item(id, value) {
+	$.ajax({
+		type: 'post',
+		url: '/ajax.php',
+		data: "do=cart&type=update&id="+id+"&value="+value
+	}).done(function(data) {
+		if(data == 1)  {
+			$('#'+id+'>td.cart_quantity>div>input').val(value);
+			$('#'+id+'>td.cart_total>p').html($('#'+id+'>td.cart_price>p').html()*value);
+		}
+	}).fail(function() {
+		console.log('fail');
+	});
+}
 
+function add_to_cart(id) {
+	$.ajax({
+		type: 'post',
+		url: '/ajax.php',
+		data: "do=cart&type=add&id="+id
+	}).done(function(data) {
+		if(data == 1)  alert('Товар добавлен')
+	}).fail(function() {
+		console.log('fail');
+	});
 }
 
 function delete_cart_item(id) {
@@ -30,7 +53,19 @@ function delete_cart_item(id) {
 		url: '/ajax.php',
 		data: "do=cart&type=del&id="+id
 	}).done(function(data) {
-		$('#cart_products').html(data);
+		if(data==1) $('#'+id).remove();
+	}).fail(function() {
+		console.log('fail');
+	});
+}
+
+function user_logout() {
+	$.ajax({
+		type: 'post',
+		url: '/ajax.php',
+		data: "do=logout"
+	}).done(function(data) {
+		window.location="/"
 	}).fail(function() {
 		console.log('fail');
 	});
@@ -39,7 +74,11 @@ function delete_cart_item(id) {
 
 $(document).ready(function(){
 
-	
+
+	$('#user_logined').click(function (e) {
+		if(confirm("Вы действительно хотите выйти?")==true) user_logout();
+	});
+
 	$('.panel-title a').click(function (e) {
 		current_cat = $(this).attr('id');
 		count = 12;
@@ -55,19 +94,25 @@ $(document).ready(function(){
 
 	$('.cart_quantity_down').click(function (e) {
 		var id = $(this).parent().parent().parent().attr('id');
-		var value = $(this).next().val();
+		var value = $(this).prev().val();
 		value--;
 		update_cart_item(id,value);
 	});
 
-	$('.cart_quantity_delete').click(function (e) {
-		var id = $(this).parent().parent().parent().attr('id');
-	});
+	$('.add-to-cart').click(function (e) {
+		var id = $(this).attr('data-id');
+		add_to_cart(id);
+	})
 
 	$('.cart_quantity_input').focusout(function (e) {
 		var id = $(this).parent().parent().parent().attr('id');
 		var value = $(this).val();
 		update_cart_item(id,value);
+	});
+
+	$('.cart_quantity_delete').click(function (e) {
+		var id = $(this).parent().parent().attr('id');
+		delete_cart_item(id);
 	});
 
 	$('#more-items').click(function (e) {

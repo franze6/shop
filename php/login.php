@@ -38,8 +38,21 @@ if (isset($_REQUEST['do'])) {
     } elseif ($_REQUEST['do'] == "reg" && isset($_REQUEST['login']) && isset($_REQUEST['pass']) &&
         isset($_REQUEST['fst_name']) && isset($_REQUEST['lst_name'])) {
         add_user();
+    } elseif ($_REQUEST['do'] == "logout")
+        logout();
+
+}
+
+function logout() {
+    session_start([
+        'cookie_lifetime' => 86400,
+    ]);
+
+    if (!isset($_COOKIE['token'])) {
+        return 0;
     }
 
+    setcookie("token", "", 0);
 }
 
 function is_login() {

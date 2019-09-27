@@ -38,7 +38,7 @@ require_once 'php/products.php';
                                 $user_data = is_login();
                                 if($user_data != 0) {
                                     $fname = $user_data['first_name'];
-                                    echo "<li><a href=\"#\"> <i class=\"fa fa-user\"></i>Добро пожаловать, $fname!</a> </li>";
+                                    echo "<li id=\"user_logined\"><a href=\"#\"> <i class=\"fa fa-user\"></i>Добро пожаловать, $fname!</a> </li>";
                                 }
                                 else
                                     echo "<li><a href=\"/pages/login.html\"><i class=\"fa fa-lock\"></i> Войти</a></li>";

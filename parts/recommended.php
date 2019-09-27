@@ -22,6 +22,7 @@ $rec = products_rec_list();
 									    $img = $rec[$i]['img'];
 									    $price = $rec[$i]['price'];
 									    $name = $rec[$i]['name'];
+                                        $id = $rec[$i]['id'];
 									    echo "<div class=\"col-sm-4\">
 										<div class=\"product-image-wrapper\">
 											<div class=\"single-products\">
@@ -29,7 +30,7 @@ $rec = products_rec_list();
 													<img src=\"/$img\" alt=\"\" />
 													<h2>$price</h2>
 													<p>$name</p>
-													<a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в корзину</a>
+													<a data-id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в корзину</a>
 												</div>
 
 											</div>
@@ -45,6 +46,7 @@ $rec = products_rec_list();
                                         $img = $rec[$i]['img'];
                                         $price = $rec[$i]['price'];
                                         $name = $rec[$i]['name'];
+                                        $id = $rec[$i]['id'];
                                         echo "<div class=\"col-sm-4\">
 										<div class=\"product-image-wrapper\">
 											<div class=\"single-products\">
@@ -52,7 +54,7 @@ $rec = products_rec_list();
 													<img src=\"/$img\" alt=\"\" />
 													<h2>$price</h2>
 													<p>$name</p>
-													<a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в корзину</a>
+													<a data-id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в корзину</a>
 												</div>
 
 											</div>

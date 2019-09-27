@@ -12,13 +12,13 @@ foreach ($list as $val)
                                     <img src=\"/$img\" alt=\"\" />
                                     <h2>$price</h2>
                                     <p>$name</p>
-                                    <a id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
+                                    <a data-id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
                                 </div>
                                 <div class=\"product-overlay\">
                                     <div class=\"overlay-content\">
                                         <h2>$price</h2>
                                         <p>$name</p>
-                                        <a id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
+                                        <a data-id=\"$id\" href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Добавить в козину</a>
                                     </div>
                                 </div>
                             </div>
