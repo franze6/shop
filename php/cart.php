@@ -50,9 +50,10 @@ function del_from_cart() {
 function update_item_count() {
     $data = is_login();
     if($data == 0) return 0;
+    if(!is_numeric($_REQUEST['value'])) return 0;
 
     $db = db_connect();
     $query = $db->prepare("UPDATE `cart_int` SET `count_items` = :c_val WHERE `product_id` = :p_id AND `user_id` = :u_id");
-    $query->execute(array('c_val'=>$_REQUEST['value'], 'p_id'=>$_REQUEST['id'], 'u_id'=>$data['id']));
+    $query->execute(array('c_val'=>abs(round($_REQUEST['value'])), 'p_id'=>$_REQUEST['id'], 'u_id'=>$data['id']));
     return 1;
 }

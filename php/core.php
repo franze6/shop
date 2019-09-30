@@ -20,3 +20,14 @@ function get_logo()
     $query->execute();
     return $query->fetch()['value'];
 }
+
+function get_slider_items() {
+    $db = db_connect();
+
+    $query = $db->prepare("SELECT * FROM slider_items WHERE 1 LIMIT 0,3");
+    $query->execute();
+
+    $data = $query->fetchAll();
+    if(count($data)>0) return $data;
+    else return 0;
+}

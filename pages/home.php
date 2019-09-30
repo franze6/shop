@@ -2,12 +2,7 @@
 
 <?php
 
-$db = db_connect();
-
-$query = $db->prepare("SELECT * FROM slider_items WHERE 1 LIMIT 0,3");
-$query->execute();
-
-$data = $query->fetchAll();
+$data = get_slider_items();
 ?>
 <section id="slider"><!--slider-->
     <div class="container">
@@ -32,6 +27,7 @@ $data = $query->fetchAll();
                             $descr = $val['descr'];
                             $button_text = $val['button_text'];
                             $img = $val['img'];
+                            $url = $val['url'];
                             if($data[0]['id'] == $val['id'])
                                 echo "<div class=\"item active\">";
                             else
@@ -41,7 +37,7 @@ $data = $query->fetchAll();
                                     <h1>$name</h1>
                                     <h2>$subname</h2>
                                     <p>$descr</p>
-                                    <button type=\"button\" class=\"btn btn-default get\">$button_text</button>
+                                    <button type=\"button\" data-url=\"$url\" class=\"btn btn-default get\">$button_text</button>
                                     </div>
                                     <div class=\"col-sm-6\">
                                         <img src=\"/$img\" class=\"girl img-responsive\" alt=\"\" />

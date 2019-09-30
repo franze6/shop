@@ -29,10 +29,22 @@ function update_cart_item(id, value) {
 		if(data == 1)  {
 			$('#'+id+'>td.cart_quantity>div>input').val(value);
 			$('#'+id+'>td.cart_total>p').html($('#'+id+'>td.cart_price>p').html()*value);
+			update_total();
 		}
 	}).fail(function() {
 		console.log('fail');
 	});
+
+}
+
+function update_total() {
+	var prices = $('.cart_total>p');
+	var total_price = 0;
+	for(i = 0; i < prices.length; i++) {
+		total_price+=parseInt(prices[i].innerHTML,10);
+	}
+	$('#sub-total').html(total_price);
+	$('#finish-total').html(total_price);
 }
 
 function add_to_cart(id) {
@@ -41,7 +53,8 @@ function add_to_cart(id) {
 		url: '/ajax.php',
 		data: "do=cart&type=add&id="+id
 	}).done(function(data) {
-		if(data == 1)  alert('Товар добавлен')
+		if(data == 1)  alert('Товар добавлен');
+		else alert('Необходимо авторизоваться');
 	}).fail(function() {
 		console.log('fail');
 	});
@@ -53,7 +66,10 @@ function delete_cart_item(id) {
 		url: '/ajax.php',
 		data: "do=cart&type=del&id="+id
 	}).done(function(data) {
-		if(data==1) $('#'+id).remove();
+		if(data==1) {
+			$('#'+id).remove();
+			update_total();
+		}
 	}).fail(function() {
 		console.log('fail');
 	});
@@ -76,16 +92,23 @@ $(document).ready(function(){
 
 
 	$('#user_logined').click(function (e) {
+		e.preventDefault();
 		if(confirm("Вы действительно хотите выйти?")==true) user_logout();
 	});
 
 	$('.panel-title a').click(function (e) {
+		e.preventDefault();
 		current_cat = $(this).attr('id');
 		count = 12;
 		send_sort();
 	});
 
+	$('.get').click(function (e) {
+		window.location =  $(this).attr('data-url');
+	});
+
 	$('.cart_quantity_up').click(function (e) {
+		e.preventDefault();
 		var id = $(this).parent().parent().parent().attr('id');
 		var value = $(this).next().val();
 		value++;
@@ -93,6 +116,7 @@ $(document).ready(function(){
 	});
 
 	$('.cart_quantity_down').click(function (e) {
+		e.preventDefault();
 		var id = $(this).parent().parent().parent().attr('id');
 		var value = $(this).prev().val();
 		value--;
@@ -100,17 +124,19 @@ $(document).ready(function(){
 	});
 
 	$('.add-to-cart').click(function (e) {
+		e.preventDefault();
 		var id = $(this).attr('data-id');
 		add_to_cart(id);
 	})
 
 	$('.cart_quantity_input').focusout(function (e) {
 		var id = $(this).parent().parent().parent().attr('id');
-		var value = $(this).val();
+		var value = Math.round(Math.abs($(this).val()));
 		update_cart_item(id,value);
 	});
 
 	$('.cart_quantity_delete').click(function (e) {
+		e.preventDefault();
 		var id = $(this).parent().parent().attr('id');
 		delete_cart_item(id);
 	});

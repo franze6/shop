@@ -15,7 +15,7 @@ require_once 'php/products.php';
     <link href="/css/prettyPhoto.css" rel="stylesheet">
     <link href="/css/price-range.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
-	<link href="/css/main.css" rel="stylesheet">
+	<link href="/css/main.css?<?=time()?>" rel="stylesheet">
 	<link href="/css/responsive.css" rel="stylesheet">
 </head><!--/head-->
 
@@ -162,6 +162,6 @@ require_once 'php/products.php';
 	<script src="/js/jquery.scrollUp.min.js"></script>
 	<script src="/js/price-range.js"></script>
     <script src="/js/jquery.prettyPhoto.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?<?=time()?>"></script>
 </body>
 </html>

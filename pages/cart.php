@@ -6,6 +6,8 @@ if($user_data == 0) {
 else
     $cart_list = cart_list($user_data['id']);
 
+$total_count = 0;
+
 ?>
 <section id="cart_items">
     <div class="container">
@@ -30,6 +32,7 @@ else
                     $name = $val['name'];
                     $count = $val['count_items'];
                     $id =$val['product_id'];
+                    $total_count+=$price*$count;
                     echo "<tr id=\"$id\">
                     <td class=\"cart_product\">
                         <a href=\"\"><img src=\"/$img\" alt=\"\"></a>
@@ -61,6 +64,25 @@ else
 
                 }
                 ?>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                    <td colspan="2">
+                        <table class="table table-condensed total-result">
+                            <tr>
+                                <td>Товар в корзине</td>
+                                <td id="sub-total"><?=$total_count?></td>
+                            </tr>
+                            <tr class="shipping-cost">
+                                <td>Доставка</td>
+                                <td>Бесплатно</td>
+                            </tr>
+                            <tr>
+                                <td>Итог</td>
+                                <td><span id="finish-total"><?=$total_count?></span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
